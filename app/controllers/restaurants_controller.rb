@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
 
   before_action :authenticate_user!, :except => [:index, :show]
+  before_filter :require_permission, :only => [:edit, :update, :destroy]
 
   def index
     @restaurants = Restaurant.all
@@ -42,5 +43,12 @@ class RestaurantsController < ApplicationController
     @restaurant.destroy
     flash[:notice] = 'Restaurant deleted successfully'
     redirect_to restaurants_path
+  end
+
+  def require_permission
+    if current_user != Restaurant.find(params[:restaurant_id]).user
+      flash[:notice] = 'error'
+      redirect_to restaurants_path
+    end
   end
 end
