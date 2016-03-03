@@ -8,7 +8,7 @@ class RestaurantsController < ApplicationController
   end
 
   def new
-      @restaurant = current_user.restaurants.new
+    @restaurant = current_user.restaurants.new
   end
 
   def create

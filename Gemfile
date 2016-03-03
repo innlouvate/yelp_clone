@@ -62,4 +62,9 @@ group :test do
   gem 'shoulda-matchers', require: false
 
   gem 'rspec-collection_matchers'
+
+  gem 'poltergeist'
+
+  gem 'database_cleaner'
+  
 end
