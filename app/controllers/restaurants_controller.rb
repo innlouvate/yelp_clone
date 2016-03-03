@@ -46,7 +46,7 @@ class RestaurantsController < ApplicationController
   end
 
   def require_permission
-    if current_user != Restaurant.find(params[:restaurant_id]).user
+    if current_user != Restaurant.find(params[:id]).user
       flash[:notice] = 'error'
       redirect_to restaurants_path
     end
