@@ -41,6 +41,8 @@ feature 'restaurants' do
       expect(current_path).to eq '/users/sign_in'
     end
 
+
+
     context 'an invalid restaurant' do
       it 'does not let you submit a name that is too short' do
         sign_in
@@ -69,7 +71,7 @@ feature 'restaurants' do
     before { Restaurant.create name: 'KFC' }
 
     scenario 'let a user edit a restaurant' do
-      visit '/restaurants'
+      sign_in
       click_link 'Edit KFC'
       fill_in 'Name', with: 'Kentucky Fried Chicken'
       click_button 'Update Restaurant'
@@ -82,7 +84,7 @@ feature 'restaurants' do
     before {Restaurant.create(name: 'KFC')}
 
     scenario 'let a user delete a restaurant' do
-      visit '/restaurants'
+      sign_in
       click_link 'Delete KFC'
       expect(page).not_to have_content('KFC')
       expect(page).to have_content('Restaurant deleted successfully')
