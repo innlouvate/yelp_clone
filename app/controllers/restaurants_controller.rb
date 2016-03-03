@@ -4,7 +4,11 @@ class RestaurantsController < ApplicationController
   end
 
   def new
-    @restaurant = Restaurant.new
+    if user_signed_in?
+      @restaurant = Restaurant.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create

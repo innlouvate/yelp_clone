@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative 'feature_helper'
 
 feature 'restaurants' do
 
@@ -26,7 +27,7 @@ feature 'restaurants' do
 
   context 'creating restaurants' do
     scenario 'prompts user to fill out a form, then displays the new restaurant' do
-      visit '/restaurants'
+      sign_in
       click_link 'Add a restaurant'
       fill_in 'Name', with: 'KFC'
       click_button 'Create Restaurant'
@@ -34,9 +35,15 @@ feature 'restaurants' do
       expect(current_path).to eq '/restaurants'
     end
 
+    scenario 'user must be logged in to create a restaurant' do
+      visit '/restaurants'
+      click_link 'Add a restaurant'
+      expect(current_path).to eq '/users/sign_in'
+    end
+
     context 'an invalid restaurant' do
       it 'does not let you submit a name that is too short' do
-        visit '/restaurants'
+        sign_in
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'KF'
         click_button 'Create Restaurant'

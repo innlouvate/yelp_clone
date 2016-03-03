@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative 'feature_helper'
 
 feature 'User can sign in' do
   context "User not signed in and on homepage" do
@@ -16,12 +17,7 @@ feature 'User can sign in' do
 
   context "user signed in on the homepage" do
     before do
-      visit('/')
-      click_link('Sign up')
-      fill_in('Email', with: 'test@example.com')
-      fill_in('Password', with: 'testtest')
-      fill_in('Password confirmation', with: 'testtest')
-      click_button('Sign up')
+      sign_in
     end
 
     it "should see 'sign out' link" do
