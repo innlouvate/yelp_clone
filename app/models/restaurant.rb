@@ -14,4 +14,10 @@ class Restaurant < ActiveRecord::Base
     reviews.average(:rating)
   end
 
+  def build_review(attributes = {}, user)
+    review = reviews.build(attributes)
+    review.user = user
+    review
+  end
+
 end
